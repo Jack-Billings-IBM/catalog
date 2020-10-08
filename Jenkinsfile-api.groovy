@@ -56,39 +56,16 @@ node('master') {
     }
 }
 
- 
 node('nodejs') {
-   def templateName = 'egui'
-   stage('build') {
-           script {
-               openshift.withCluster() {
-                   openshift.withProject() {
-                     def builds = openshift.selector("bc", templateName).related('builds')
-                     timeout(5) { 
-                       builds.untilEach(1) {
-                         return (it.object().status.phase == "Complete")
-                       }
-                     }
-                   }
-               }
-         }
-       }
-    stage('deploy') {
-       script {
-            openshift.withCluster() {
-                openshift.withProject() {
-                  def rm = openshift.selector("dc", templateName).rollout().latest()
-                  timeout(5) { 
-                    openshift.selector("dc", templateName).related('pods').untilEach(1) {
-                      return (it.object().status.phase == "Running")
-                    }
-                  }
-                }
-        }
-      }
+    stage('Build node.js egui App') {
+        openshiftBuild(buildConfig: 'egui', showBuildLogs: 'true')
     }
-   
+    stage('Deploy node.js egui App') {
+        openshiftDeploy(deploymentConfig: 'egui')
+    }
 }
+ 
+
 
 
    //Will stop a running API if required and delete it
