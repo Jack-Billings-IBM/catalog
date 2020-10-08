@@ -74,6 +74,7 @@ node('nodejs') {
          }
        }
     stage('deploy') {
+       script {
             openshift.withCluster() {
                 openshift.withProject() {
                   def rm = openshift.selector("dc", templateName).rollout().latest()
