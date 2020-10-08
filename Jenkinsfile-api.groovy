@@ -57,7 +57,7 @@ node('master') {
 }
 node('nodejs') {
    def templateName = 'egui'
-   stage('build') {
+   stage('Build egui') {
            script {
                openshift.withCluster() {
                    openshift.withProject() {
@@ -71,7 +71,7 @@ node('nodejs') {
                }
          }
        }
-    stage('deploy') {
+    stage('Deploy egui') {
        script {
             openshift.withCluster() {
                 openshift.withProject() {
