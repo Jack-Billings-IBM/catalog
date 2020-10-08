@@ -72,8 +72,8 @@ node('nodejs') {
        println("Checking existence/status of API: "+apiName)
 
        //will be building curl commands, so saving the tail end for appending
-       def urlval = "10.1.1.2:9080/zosConnect/apis/"+apiName
-       def stopurlval = "10.1.1.2:9080/zosConnect/apis/"+apiName+"?status=stopped"
+       def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/apis/"+apiName
+       def stopurlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/apis/"+apiName+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
@@ -126,7 +126,7 @@ node('nodejs') {
    def installAPI(apiFileName){
        println "Starting API deployment now"
 
-       def urlval = "10.1.1.2:9080/zosConnect/apis/"
+       def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/apis/"
        def respCode = ""
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
@@ -145,7 +145,7 @@ node('nodejs') {
    def testAPI(serviceName) {
       println "Starting testing now"
 
-      def urlval = "10.1.1.2:9080/catalogManager/items"
+      def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/catalogManager/items"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'
