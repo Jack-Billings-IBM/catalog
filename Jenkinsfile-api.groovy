@@ -77,9 +77,9 @@ node('nodejs') {
        script {
             openshift.withCluster() {
                 openshift.withProject() {
-                  def rm = openshift.selector("dc", templateName).rollout().latest()
+                  def rm = openshift.selector("d", templateName).rollout().latest()
                   timeout(5) { 
-                    openshift.selector("dc", templateName).related('pods').untilEach(1) {
+                    openshift.selector("d", templateName).related('pods').untilEach(1) {
                       return (it.object().status.phase == "Running")
                     }
                   }
