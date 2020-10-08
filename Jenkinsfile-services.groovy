@@ -71,8 +71,8 @@ node('master') {
        println("Checking existence/status of Service name: "+service_name)
 
        //will be building curl commands, so saving the tail end for appending
-       def urlval = "10.1.1.2:9080/zosConnect/services/"+service_name
-       def stopurlval = "10.1.1.2:9080/zosConnect/services/"+service_name+"?status=stopped"
+       def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"+service_name
+       def stopurlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"+service_name+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
@@ -124,7 +124,7 @@ node('master') {
    def installSar(sarFileName){
        println "Starting sar deployment now"
 
-       def urlval = "10.1.1.2:9080/zosConnect/services/"
+       def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"
        def respCode = ""
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
@@ -143,7 +143,7 @@ node('master') {
    def testServices(serviceName) {
       println "Starting testing now"
 
-      def urlval = "http://esysmvs.wsclab.washington.ibm.com:39555/zosConnect/services/"+serviceName+"?action=invoke"
+      def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"+serviceName+"?action=invoke"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'
