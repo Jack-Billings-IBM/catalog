@@ -35,6 +35,20 @@ node('master') {
        def serviceName2 = "inquireCatalog"
        testAPI(serviceName2)
     }
+
+    stage("Publish Artifacts to Artifactory") {
+       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+       def server = Artifactory.server "artifactory"
+
+       // Read the upload spec which was downloaded from github.
+       def uploadSpec = readFile 'apis-upload.json'
+       // Upload to Artifactory.
+       def buildInfo = server.upload spec: uploadSpec
+
+       // Publish the build to Artifactory
+       server.publishBuildInfo buildInfo
+      
+    }   
    
     stage("Push to GitHub") {
        sh "rm response.json"
