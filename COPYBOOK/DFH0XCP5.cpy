@@ -36,9 +36,9 @@
       ******************************************************************
 
       *    Catalogue COMMAREA structure
-           03 CA-REQUEST-ID            PIC X(6).
-           03 CA-RETURN-CODE           PIC 9(2) DISPLAY.
-           03 CA-RESPONSE-MESSAGE      PIC X(79).
+      *     03 CA-REQUEST-ID            PIC X(6).
+      *     03 CA-RETURN-CODE           PIC 9(2) DISPLAY.
+      *     03 CA-RESPONSE-MESSAGE      PIC X(79).
       *    Fields used in Place Order
            03 CA-ORDER-REQUEST.
                05 CA-USERID                PIC X(8).
