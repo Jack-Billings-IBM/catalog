@@ -44,6 +44,20 @@ node('master') {
        testServices(serviceName2)
     }
    
+    stage("Publish Artifacts to Artifactory") {
+       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+       def server = Artifactory.server "artifactory"
+
+       // Read the upload spec which was downloaded from github.
+       def uploadSpec = readFile 'upload.json'
+       // Upload to Artifactory.
+       def buildInfo = server.upload spec: uploadSpec
+
+       // Publish the build to Artifactory
+       server.publishBuildInfo buildInfo
+      
+    }
+   
     stage("Push to GitHub") {
        sh "rm response.json"
        sh "rm responseDel.json"
@@ -71,8 +85,8 @@ node('master') {
        println("Checking existence/status of Service name: "+service_name)
 
        //will be building curl commands, so saving the tail end for appending
-       def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"+service_name
-       def stopurlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"+service_name+"?status=stopped"
+       def urlval = "150.238.240.74:31158/zosConnect/services/"+service_name
+       def stopurlval = "150.238.240.74:31158/zosConnect/services/"+service_name+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
@@ -124,7 +138,7 @@ node('master') {
    def installSar(sarFileName){
        println "Starting sar deployment now"
 
-       def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"
+       def urlval = "150.238.240.74:31158/zosConnect/services/"
        def respCode = ""
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
@@ -143,7 +157,7 @@ node('master') {
    def testServices(serviceName) {
       println "Starting testing now"
 
-      def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/services/"+serviceName+"?action=invoke"
+      def urlval = "150.238.240.74:31158/zosConnect/services/"+serviceName+"?action=invoke"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'
