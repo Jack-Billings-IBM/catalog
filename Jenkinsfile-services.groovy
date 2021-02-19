@@ -49,7 +49,7 @@ node('master') {
        def server = Artifactory.server "artifactory"
 
        // Read the upload spec which was downloaded from github.
-       def uploadSpec = readFile 'upload.json'
+       def uploadSpec = readFile 'services-upload.json'
        // Upload to Artifactory.
        def buildInfo = server.upload spec: uploadSpec
 
