@@ -98,7 +98,7 @@ node('nodejs') {
 
        //will be building curl commands, so saving the tail end for appending
        def urlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/apis/"+apiName
-       def stopurlval = "cap-sg-prd-4.securegateway.appdomain.cloud:20038/zosConnect/apis/"+apiName+"?status=stopped"
+       def stopurlval = "http://150.238.240.73:31158/zosConnect/apis/"+apiName+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
