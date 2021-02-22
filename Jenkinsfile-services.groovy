@@ -19,8 +19,6 @@ node('master') {
         println "Called zconbt for inquireCatalog"
         sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireSingle.properties --file=${WORKSPACE}/archives/inquireSingle.sar "
         println "Called zconbt for inquireSingle"
-        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireTest.properties --file=${WORKSPACE}/archives/inquireTest.sar "
-        println "Called zconbt for inquireSingle"
         println "Exiting Stage 2, entering Stage 3!"
    }
    stage('Check for and Handle Existing Services') {
