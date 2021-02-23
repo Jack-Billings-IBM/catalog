@@ -35,9 +35,9 @@
       *                                                                *
       ******************************************************************
       *    Catalogue COMMAREA structure
-           03 CA-REQUEST-ID            PIC X(6).
-           03 CA-RETURN-CODE           PIC 9(2) DISPLAY.
-           03 CA-RESPONSE-MESSAGE      PIC X(79).
+           03 CA-SINGLE-REQUEST-ID            PIC X(6).
+           03 CA-SINGLE-RETURN-CODE           PIC 9(2) DISPLAY.
+           03 CA-SINGLE-RESPONSE-MESSAGE      PIC X(79).
       *    Fields used in Inquire Single
            03 CA-INQUIRE-SINGLE.
                05 CA-ITEM-REF-REQ          PIC 9(4) DISPLAY.
@@ -47,8 +47,8 @@
                    07 CA-SNGL-ITEM-REF     PIC 9(4) DISPLAY.
                    07 CA-SNGL-DESCRIPTION  PIC X(40).
                    07 CA-SNGL-DEPARTMENT   PIC 9(3) DISPLAY.
-                   07 CA-SNGL-COST         PIC X(6).
-                   07 IN-SNGL-STOCK        PIC 9(4) DISPLAY.
+      *             07 CA-SNGL-COST         PIC X(6).
+      *             07 IN-SNGL-STOCK        PIC 9(4) DISPLAY.
 
 
 

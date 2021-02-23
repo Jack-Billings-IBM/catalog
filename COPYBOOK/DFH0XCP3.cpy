@@ -38,6 +38,7 @@
            03 CA-REQUEST-ID            PIC X(6).
            03 CA-RETURN-CODE           PIC 9(2) DISPLAY.
            03 CA-RESPONSE-MESSAGE      PIC X(79).
+           03 CA-REQUEST-SPECIFIC      PIC X(911).
       *    Fields used in Inquire Catalog
            03 CA-INQUIRE-REQUEST.
                05 CA-LIST-START-REF        PIC 9(4) DISPLAY.
@@ -48,6 +49,6 @@
                    07 CA-DESCRIPTION       PIC X(40).
                    07 CA-DEPARTMENT        PIC 9(3) DISPLAY.
                    07 CA-COST              PIC X(6).
-      *             07 IN-STOCK             PIC 9(4) DISPLAY.
-      *             07 ON-ORDER             PIC 9(3) DISPLAY.
+                   07 IN-STOCK             PIC 9(4) DISPLAY.
+                   07 ON-ORDER             PIC 9(3) DISPLAY.
 
