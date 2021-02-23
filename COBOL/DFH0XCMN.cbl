@@ -138,10 +138,10 @@
            COPY DFH0XCP3.
 
        01 DFHCOMMAREA2.
-           COPY DFH0XCP4.
+           COPY DFH0XCP4.  
 
        01 DFHCOMMAREA3.
-           COPY DFH0XCP5.
+           COPY DFH0XCP5.    
 
       ******************************************************************
       *    P R O C E D U R E S

@@ -69,38 +69,38 @@ node('master') {
        }
     }
 }
-node('nodejs') {
-   def templateName = 'egui'
-   stage('Build egui') {
-           script {
-               openshift.withCluster() {
-                   openshift.withProject() {
-                     def builds = openshift.selector("bc", templateName).related('builds')
-                     timeout(5) { 
-                       builds.untilEach(1) {
-                         return (it.object().status.phase == "Complete")
-                       }
-                     }
-                   }
-               }
-         }
-       }
-    stage('Deploy egui') {
-       script {
-            openshift.withCluster() {
-                openshift.withProject() {
-                  def rm = openshift.selector("dc", templateName).rollout().latest()
-                  timeout(5) { 
-                    openshift.selector("dc", templateName).related('pods').untilEach(1) {
-                      return (it.object().status.phase == "Running")
-                    }
-                  }
-                }
-        }
-      }
-    }
+// node('nodejs') {
+//    def templateName = 'egui'
+//    stage('Build egui') {
+//            script {
+//                openshift.withCluster() {
+//                    openshift.withProject() {
+//                      def builds = openshift.selector("bc", templateName).related('builds')
+//                      timeout(5) { 
+//                        builds.untilEach(1) {
+//                          return (it.object().status.phase == "Complete")
+//                        }
+//                      }
+//                    }
+//                }
+//          }
+//        }
+//     stage('Deploy egui') {
+//        script {
+//             openshift.withCluster() {
+//                 openshift.withProject() {
+//                   def rm = openshift.selector("dc", templateName).rollout().latest()
+//                   timeout(5) { 
+//                     openshift.selector("dc", templateName).related('pods').untilEach(1) {
+//                       return (it.object().status.phase == "Running")
+//                     }
+//                   }
+//                 }
+//         }
+//       }
+//     }
    
-}
+// }
  
 
 
