@@ -1,7 +1,7 @@
 {
   "files": [
     {
-      "pattern": "catalog.aar",
+      "pattern": "catalog/catalog.aar",
       "target": "catalogmanager/apis/"
     }
   ]
