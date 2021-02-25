@@ -55,27 +55,33 @@ node('master') {
 
        // Publish the build to Artifactory
        server.publishBuildInfo buildInfo
-      
-    }
-   
-    stage("Push to GitHub") {
+
        sh "rm response.json"
        sh "rm responseDel.json"
        sh "rm responseStop.json"
        sh "rm inquireSingle.sar"
        sh "rm inquireCatalog.sar"
-       sh "git config --global user.email 'jack.billings@ibm.com'"
-       sh "git config --global user.name 'Jack-Billings-IBM'"
-       sh "git add -A"
-       sh "git commit -m 'new sar file'"
-       //need to add git credentials to jenkins
-       withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
-           sh('''
-               git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
-               git push origin HEAD:master
-           ''')
-       }
+      
     }
+   
+    // stage("Push to GitHub") {
+    //    sh "rm response.json"
+    //    sh "rm responseDel.json"
+    //    sh "rm responseStop.json"
+    //    sh "rm inquireSingle.sar"
+    //    sh "rm inquireCatalog.sar"
+    //    sh "git config --global user.email 'jack.billings@ibm.com'"
+    //    sh "git config --global user.name 'Jack-Billings-IBM'"
+    //    sh "git add -A"
+    //    sh "git commit -m 'new sar file'"
+    //    //need to add git credentials to jenkins
+    //    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
+    //        sh('''
+    //            git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+    //            git push origin HEAD:master
+    //        ''')
+    //    }
+    // }
 }
 
 
