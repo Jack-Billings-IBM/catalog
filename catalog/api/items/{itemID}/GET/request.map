@@ -3,14 +3,14 @@
   <xsd:element name="DFH0XCMNOperation" type="tns:DFH0XCMNOperation"/>
   <xsd:complexType name="DFH0XCMNOperation">
     <xsd:sequence>
-      <xsd:element name="ca_request_id">
+      <xsd:element name="ca_single_request_id">
         <xsd:simpleType>
           <xsd:restriction base="xsd:string">
             <xsd:maxLength value="6"/>
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element name="ca_return_code">
+      <xsd:element name="ca_single_return_code">
         <xsd:simpleType>
           <xsd:restriction base="xsd:integer">
             <xsd:minInclusive value="0"/>
@@ -18,7 +18,7 @@
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element name="ca_response_message">
+      <xsd:element name="ca_single_response_message">
         <xsd:simpleType>
           <xsd:restriction base="xsd:string">
             <xsd:maxLength value="79"/>
@@ -70,22 +70,6 @@
         <xsd:simpleType>
           <xsd:restriction base="xsd:string">
             <xsd:maxLength value="6"/>
-          </xsd:restriction>
-        </xsd:simpleType>
-      </xsd:element>
-      <xsd:element name="in_sngl_stock">
-        <xsd:simpleType>
-          <xsd:restriction base="xsd:integer">
-            <xsd:minInclusive value="0"/>
-            <xsd:maxInclusive value="9999"/>
-          </xsd:restriction>
-        </xsd:simpleType>
-      </xsd:element>
-      <xsd:element name="on_sngl_order">
-        <xsd:simpleType>
-          <xsd:restriction base="xsd:integer">
-            <xsd:minInclusive value="0"/>
-            <xsd:maxInclusive value="999"/>
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
@@ -143,21 +127,21 @@
             <input path="Body/DFH0XCMNOperation"/>
             <output path="."/>
             <updates>
-                <assign value="01INQS">
-                    <output httpIn="body" omitFromInterface="true" path="ca_request_id" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
-                </assign>
                 <move>
                     <input httpIn="path" path="PathParameters/itemID" shape="1" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
                     <output httpIn="body" path="ca_inquire_single/ca_item_ref_req" shape="1,2,3" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:integer"/>
                 </move>
                 <remove>
-                    <output httpIn="body" path="ca_return_code" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:integer"/>
-                </remove>
-                <remove>
-                    <output httpIn="body" path="ca_response_message" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
-                </remove>
-                <remove>
                     <output path="ca_inquire_single/ca_single_item" shape="1,2,3"/>
+                </remove>
+                <assign value="01INQS">
+                    <output httpIn="body" omitFromInterface="true" path="ca_single_request_id" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
+                </assign>
+                <remove>
+                    <output httpIn="body" path="ca_single_response_message" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
+                </remove>
+                <remove>
+                    <output httpIn="body" path="ca_single_return_code" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:integer"/>
                 </remove>
             </updates>
         </passthrough>

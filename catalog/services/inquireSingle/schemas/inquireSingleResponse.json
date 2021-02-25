@@ -6,16 +6,16 @@
       "DFH0XCMNOperationResponse":{
          "type":"object",
          "properties":{
-            "ca_request_id":{
+            "ca_single_request_id":{
                "type":"string",
                "maxLength":6
             },
-            "ca_return_code":{
+            "ca_single_return_code":{
                "type":"integer",
                "maximum":99,
                "minimum":0
             },
-            "ca_response_message":{
+            "ca_single_response_message":{
                "type":"string",
                "maxLength":79
             },
@@ -47,25 +47,13 @@
                         "ca_sngl_cost":{
                            "type":"string",
                            "maxLength":6
-                        },
-                        "in_sngl_stock":{
-                           "type":"integer",
-                           "maximum":9999,
-                           "minimum":0
-                        },
-                        "on_sngl_order":{
-                           "type":"integer",
-                           "maximum":999,
-                           "minimum":0
                         }
                      },
                      "required":[
                         "ca_sngl_item_ref",
                         "ca_sngl_description",
                         "ca_sngl_department",
-                        "ca_sngl_cost",
-                        "in_sngl_stock",
-                        "on_sngl_order"
+                        "ca_sngl_cost"
                      ]
                   }
                },
@@ -76,9 +64,9 @@
             }
          },
          "required":[
-            "ca_request_id",
-            "ca_return_code",
-            "ca_response_message",
+            "ca_single_request_id",
+            "ca_single_return_code",
+            "ca_single_response_message",
             "ca_inquire_single"
          ]
       }

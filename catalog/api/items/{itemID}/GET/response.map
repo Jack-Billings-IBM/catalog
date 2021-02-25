@@ -3,14 +3,14 @@
   <xsd:element name="DFH0XCMNOperationResponse" type="tns:DFH0XCMNOperationResponse"/>
   <xsd:complexType name="DFH0XCMNOperationResponse">
     <xsd:sequence>
-      <xsd:element name="ca_request_id">
+      <xsd:element name="ca_single_request_id">
         <xsd:simpleType>
           <xsd:restriction base="xsd:string">
             <xsd:maxLength value="6"/>
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element name="ca_return_code">
+      <xsd:element name="ca_single_return_code">
         <xsd:simpleType>
           <xsd:restriction base="xsd:integer">
             <xsd:minInclusive value="0"/>
@@ -18,7 +18,7 @@
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element name="ca_response_message">
+      <xsd:element name="ca_single_response_message">
         <xsd:simpleType>
           <xsd:restriction base="xsd:string">
             <xsd:maxLength value="79"/>
@@ -73,22 +73,6 @@
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element name="in_sngl_stock">
-        <xsd:simpleType>
-          <xsd:restriction base="xsd:integer">
-            <xsd:minInclusive value="0"/>
-            <xsd:maxInclusive value="9999"/>
-          </xsd:restriction>
-        </xsd:simpleType>
-      </xsd:element>
-      <xsd:element name="on_sngl_order">
-        <xsd:simpleType>
-          <xsd:restriction base="xsd:integer">
-            <xsd:minInclusive value="0"/>
-            <xsd:maxInclusive value="999"/>
-          </xsd:restriction>
-        </xsd:simpleType>
-      </xsd:element>
     </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>]]></inlinedXMLSchema>
@@ -130,10 +114,10 @@
             <output path="Body/DFH0XCMNOperationResponse"/>
             <updates>
                 <remove>
-                    <output httpIn="body" path="Body/DFH0XCMNOperationResponse/ca_request_id" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
+                    <output httpIn="body" path="Body/DFH0XCMNOperationResponse/ca_inquire_single/ca_item_ref_req" shape="1,2,3" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:integer"/>
                 </remove>
                 <remove>
-                    <output httpIn="body" path="Body/DFH0XCMNOperationResponse/ca_inquire_single/ca_item_ref_req" shape="1,2,3" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:integer"/>
+                    <output httpIn="body" path="Body/DFH0XCMNOperationResponse/ca_single_request_id" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
                 </remove>
             </updates>
         </passthrough>
