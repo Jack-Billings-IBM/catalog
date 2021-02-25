@@ -15,9 +15,9 @@ node('master') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
-        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireCatalog.properties --file=${WORKSPACE}/inquireCatalog.sar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireCatalog.properties --file=${WORKSPACE}/archives/inquireCatalog.sar "
         println "Called zconbt for inquireCatalog"
-        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireSingle.properties --file=${WORKSPACE}/inquireSingle.sar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireSingle.properties --file=${WORKSPACE}/archives/inquireSingle.sar "
         println "Called zconbt for inquireSingle"
         println "Exiting Stage 2, entering Stage 3!"
    }
@@ -56,32 +56,25 @@ node('master') {
        // Publish the build to Artifactory
        server.publishBuildInfo buildInfo
 
-       sh "rm response.json"
-       sh "rm responseDel.json"
-       sh "rm responseStop.json"
-       sh "rm inquireSingle.sar"
-       sh "rm inquireCatalog.sar"
       
     }
    
-    // stage("Push to GitHub") {
-    //    sh "rm response.json"
-    //    sh "rm responseDel.json"
-    //    sh "rm responseStop.json"
-    //    sh "rm inquireSingle.sar"
-    //    sh "rm inquireCatalog.sar"
-    //    sh "git config --global user.email 'jack.billings@ibm.com'"
-    //    sh "git config --global user.name 'Jack-Billings-IBM'"
-    //    sh "git add -A"
-    //    sh "git commit -m 'new sar file'"
-    //    //need to add git credentials to jenkins
-    //    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
-    //        sh('''
-    //            git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
-    //            git push origin HEAD:master
-    //        ''')
-    //    }
-    // }
+    stage("Push to GitHub") {
+       sh "rm response.json"
+       sh "rm responseDel.json"
+       sh "rm responseStop.json"
+       sh "git config --global user.email 'jack.billings@ibm.com'"
+       sh "git config --global user.name 'Jack-Billings-IBM'"
+       sh "git add -A"
+       sh "git commit -m 'new sar file'"
+       //need to add git credentials to jenkins
+       withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
+           sh('''
+               git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+               git push origin HEAD:master
+           ''')
+       }
+    }
 }
 
 
@@ -149,7 +142,7 @@ node('master') {
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
       //curl command spits out response code into stdout.  that's then held in respCode field to evaluate
-       def command_val = "curl -X POST -o response.json -w %{response_code} --header 'Content-Type:application/zip' --data-binary @${WORKSPACE}/"+sarFileName+" --insecure "+urlval
+       def command_val = "curl -X POST -o response.json -w %{response_code} --header 'Content-Type:application/zip' --data-binary @${WORKSPACE}/archives/"+sarFileName+" --insecure "+urlval
        respCode = sh (script: command_val, returnStdout: true)
 
        println "Service Installation Response code is: "+respCode
