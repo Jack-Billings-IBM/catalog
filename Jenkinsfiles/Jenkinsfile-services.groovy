@@ -156,7 +156,7 @@ node('master') {
    def testServices(serviceName) {
       println "Starting testing now"
 
-      def urlval = "150.238.240.74:31158/zosConnect/services/"+serviceName+"?action=invoke"
+      def urlval = "150.238.240.74:30685/zosConnect/services/"+serviceName+"?action=invoke"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'
