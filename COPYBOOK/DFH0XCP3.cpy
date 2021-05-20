@@ -49,5 +49,5 @@
                    07 CA-DEPARTMENT        PIC 9(3) DISPLAY.
                    07 CA-COST              PIC X(6).
                    07 IN-STOCK             PIC 9(4) DISPLAY.
-                   07 ON-ORDER             PIC 9(3) DISPLAY.
+      *             07 ON-ORDER             PIC 9(3) DISPLAY.
 
