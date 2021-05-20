@@ -49,7 +49,7 @@
                    07 CA-SNGL-DEPARTMENT   PIC 9(3) DISPLAY.
                    07 CA-SNGL-COST         PIC X(6).
                    07 IN-SNGL-STOCK        PIC 9(4) DISPLAY.
-      *             07 ON-SNGL-ORDER        PIC 9(3) DISPLAY.
+                   07 ON-SNGL-ORDER        PIC 9(3) DISPLAY.
 
 
 
