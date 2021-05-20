@@ -2,7 +2,7 @@
   "files": [
     {
       "pattern": "archives/inquireSingle.sar",
-      "target": "catalog/services/"   
+      "target": "catalog/"   
     }
   ]
 }
